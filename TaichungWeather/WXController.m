@@ -96,7 +96,7 @@
     CGRect hiloFrame = CGRectMake(inset, headerFrame.size.height - (hiloHeight), headerFrame.size.width - 2*inset, hiloHeight);
     CGRect temperatureFrame = CGRectMake(inset-20, headerFrame.size.height - temperatureHeight - hiloHeight, headerFrame.size.width - 2*inset, temperatureHeight);
     CGRect sunriseFrame = CGRectMake(headerFrame.size.width-150, headerFrame.size.height - hiloHeight, headerFrame.size.width - 2*inset, hiloHeight);
-    CGRect sunsetFrame = CGRectMake((headerFrame.size.width-100)*_screenwidth/Iphone5swidth, headerFrame.size.height - temperatureHeight - hiloHeight, 100, temperatureHeight);
+    CGRect sunsetFrame = CGRectMake(headerFrame.size.width-100, headerFrame.size.height - temperatureHeight - hiloHeight, 100, temperatureHeight);
     CGRect iconFrame = CGRectMake(inset, temperatureFrame.origin.y - iconHeight, iconHeight, iconHeight);
     CGRect conditionsFrame = iconFrame;
     // make the conditions text a little smaller than the view
@@ -149,7 +149,8 @@
     
     
     // newcode
-    
+    NSLog(@"newcoed = %@",[_weatheralldate valueForKey:@"nowcode"]);
+    //UIImageView *imgView = [[UIImageView alloc] initWithImage:@"weather-rain2x"] ;
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@2x",[call imageName:[_weatheralldate valueForKey:@"nowcode"]]]]];
     imgView.frame=sunsetFrame;
     
