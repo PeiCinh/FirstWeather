@@ -39,7 +39,7 @@ int tablenum;
     [self UpdateWeather];
     self.screenHeight = [UIScreen mainScreen].bounds.size.height;
     [self overtablecellnum];
-    NSLog(@"y = %i",tablenum);
+    //NSLog(@"y = %i",tablenum);
     [self initView];
     [self initbutton];
 }
@@ -134,7 +134,7 @@ int tablenum;
     
     
     _weatheralldate = [ call dataFetchRequest:NULL];
-    //NSLog(@"count = %i",_weatheralldate.count);
+    ////NSLog(@"count = %i",_weatheralldate.count);
     for (NSManagedObject *info in _weatheralldate) {
         [city addObject:[info valueForKey:@"city"]];
         [nowcode addObject:[info valueForKey:@"nowcode"]];
@@ -142,7 +142,7 @@ int tablenum;
         [citywoeid addObject:[info valueForKey:@"woeid"]];
         
     }
-    //NSLog(@"city = %@,count = %i",city,[city count] );
+    ////NSLog(@"city = %@,count = %i",city,[city count] );
     //return WeatherScratch;
 }
 
@@ -152,7 +152,7 @@ int tablenum;
 }
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    //NSLog(@"222");
+    ////NSLog(@"222");
     CGRect bounds = self.view.bounds;
     
     self.backgroundImageView.frame = bounds;

@@ -25,7 +25,7 @@
     [super viewDidLoad];
     [self initView];
     DateCount = 0;
-    NSLog(@"111 = %i",DateCount);
+    //NSLog(@"111 = %i",DateCount);
     CGRect headerFrame = CGRectMake(0, 0, self.view.frame.size.width, 100);
     _header = [[UIView alloc] initWithFrame:headerFrame];
     _header.backgroundColor = [UIColor clearColor];
@@ -206,7 +206,7 @@
 - (void)searchWeatherList {
     YQL *yql = [YQL new];
     NSMutableDictionary *JsonAllDate = [yql querywhere:_SearchUi.text];
-    //NSLog(@"jsondate= %@",JsonAllDate);
+    ////NSLog(@"jsondate= %@",JsonAllDate);
     DateCount = [[JsonAllDate valueForKeyPath:@"query.count"]integerValue];
    
     SearchDate= [JsonAllDate valueForKeyPath:@"query.results.place"];
@@ -233,11 +233,11 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     //_SearchUi.showsCancelButton = YES;
-    //NSLog(@"1");
+    ////NSLog(@"1");
     for (UIView *subView in _SearchUi.subviews) {
         
         if ([subView isKindOfClass:[UIButton class]]) {
-            NSLog(@"2");
+            //NSLog(@"2");
             UIButton *cancelButton = (UIButton*)subView;
             
             [cancelButton setEnabled:YES];

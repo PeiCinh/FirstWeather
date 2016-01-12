@@ -26,7 +26,7 @@
 @implementation WXController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"viewwork");
+    //NSLog(@"viewwork");
     //YQL * yql = [YQL new];
     AppDelegate *appdelegatecell = [AppDelegate new];
     WeatherDate *call = [WeatherDate new];
@@ -54,7 +54,7 @@
     }
     self.screenwidth  = [UIScreen mainScreen].bounds.size.width;
     self.screenHeight = [UIScreen mainScreen].bounds.size.height;
-    NSLog(@"high = %f",self.screenHeight);
+    //NSLog(@"high = %f",self.screenwidth);
     [self initView];
     [self initUI];
     
@@ -91,13 +91,19 @@
     CGFloat temperatureHeight = 110;
     CGFloat hiloHeight = 40;
     CGFloat iconHeight = 30;
-    CGFloat Iphone5shigh = 568;
-    CGFloat Iphone5swidth ;
-    CGRect hiloFrame = CGRectMake(inset, headerFrame.size.height - (hiloHeight), headerFrame.size.width - 2*inset, hiloHeight);
-    CGRect temperatureFrame = CGRectMake(inset-20, headerFrame.size.height - temperatureHeight - hiloHeight, headerFrame.size.width - 2*inset, temperatureHeight);
-    CGRect sunriseFrame = CGRectMake(headerFrame.size.width-150, headerFrame.size.height - hiloHeight, headerFrame.size.width - 2*inset, hiloHeight);
-    CGRect sunsetFrame = CGRectMake(headerFrame.size.width-100, headerFrame.size.height - temperatureHeight - hiloHeight, 100, temperatureHeight);
+    CGFloat Iphone5shigh = _screenHeight/568;
+    CGFloat Iphone5swidth = _screenwidth/320;
+    //NSLog(@"1 = %f, 2 = %f",Iphone5shigh,Iphone5swidth);
+    CGRect hiloFrame = CGRectMake(inset, headerFrame.size.height - (hiloHeight*Iphone5shigh), (headerFrame.size.width - 2*inset)*Iphone5swidth, hiloHeight*Iphone5shigh);
+    //high temp / low temp
+    CGRect temperatureFrame = CGRectMake(inset-20, headerFrame.size.height -((temperatureHeight + hiloHeight)*Iphone5shigh), headerFrame.size.width - 2*inset, temperatureHeight*Iphone5shigh);
+    //now temp
+    CGRect sunriseFrame = CGRectMake(headerFrame.size.width-(160*Iphone5swidth ), hiloFrame.origin.y, hiloFrame.size.width, hiloFrame.size.height);
+    //ris / set time
+    CGRect sunsetFrame = CGRectMake(headerFrame.size.width-(130*Iphone5shigh), headerFrame.size.height - ((temperatureHeight + hiloHeight)*Iphone5shigh), 120*Iphone5swidth, temperatureHeight*Iphone5shigh);
+    //now code
     CGRect iconFrame = CGRectMake(inset, temperatureFrame.origin.y - iconHeight, iconHeight, iconHeight);
+   
     CGRect conditionsFrame = iconFrame;
     // make the conditions text a little smaller than the view
     // and to the right of our icon
@@ -126,12 +132,12 @@
     [header addSubview:hiloLabel];
     
     // cityname
-    UILabel *cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 50)];
+    UILabel *cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 50*Iphone5shigh  )];
     cityLabel.backgroundColor = [UIColor clearColor];
     cityLabel.textColor = [UIColor whiteColor];
     //cityLabel.text = [NSString stringWithFormat:@"%@",[self.weatheralldate valueForKeyPath:[call JSONKey:@"city"]]];
     cityLabel.text = [NSString stringWithFormat:@"%@",[_weatheralldate valueForKey:@"city"]];
-    cityLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:38];
+    cityLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:38*Iphone5shigh];
     cityLabel.textAlignment = NSTextAlignmentCenter;
     [header addSubview:cityLabel];
     
@@ -149,7 +155,7 @@
     
     
     // newcode
-    NSLog(@"newcoed = %@",[_weatheralldate valueForKey:@"nowcode"]);
+    //NSLog(@"newcoed = %@",[_weatheralldate valueForKey:@"nowcode"]);
     //UIImageView *imgView = [[UIImageView alloc] initWithImage:@"weather-rain2x"] ;
     UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@2x",[call imageName:[_weatheralldate valueForKey:@"nowcode"]]]]];
     imgView.frame=sunsetFrame;
@@ -162,12 +168,12 @@
     sunrise.textColor = [UIColor whiteColor];
     
     //sunrise.text = [NSString stringWithFormat:@"↑%@ / ↓%@",[self.weatheralldate valueForKeyPath:[call JSONKey:@"sunrise"]],[self.weatheralldate valueForKeyPath:[call JSONKey:@"sunset"]]];
-    sunrise.text = [NSString stringWithFormat:@"↑%@ / ↓%@",[self.weatheralldate valueForKeyPath:@"sunrise"],[self.weatheralldate valueForKeyPath:@"sunrise"]];
-    sunrise.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
+    sunrise.text = [NSString stringWithFormat:@"↑%@ / ↓%@",[self.weatheralldate valueForKeyPath:@"sunrise"],[self.weatheralldate valueForKeyPath:@"sunset"]];
+    sunrise.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15*Iphone5swidth];
     [header addSubview:sunrise];
     
     _menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _menuButton.frame = CGRectMake(10, 30, 30, 30);
+    _menuButton.frame = CGRectMake(10*Iphone5shigh, 30*Iphone5shigh, 30*Iphone5shigh, 30*Iphone5shigh);
     [_menuButton setImage:[UIImage imageNamed:@"menuIcon.png"] forState:UIControlStateNormal];
     [_menuButton addTarget:self action:@selector(goweathertable) forControlEvents:UIControlEventTouchUpInside];
     [header addSubview:_menuButton];
@@ -247,7 +253,7 @@
 }
 
 - (void)NothingCell:(UITableViewCell *)cell title:(NSString *)title {
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18*(_screenHeight/568)];
     cell.textLabel.text = title;
     cell.detailTextLabel.text = @"";
     cell.imageView.image = nil;
@@ -256,8 +262,8 @@
 
 - (void)DateDailyCell:(UITableViewCell *)cell :(int *)row{
     WeatherDate * call = [ WeatherDate new];
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
-    cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18*(_screenHeight/568)];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18*(_screenHeight/568)];
     
     int num = row ;
     num-=1;
