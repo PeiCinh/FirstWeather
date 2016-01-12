@@ -55,7 +55,7 @@
 
 }
 - (void)coredataupdate{
-    ////NSLog(@"time");
+    NSLog(@"time");
     NSManagedObjectContext *context = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Weather" inManagedObjectContext:context]];

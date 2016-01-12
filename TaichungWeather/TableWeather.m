@@ -21,6 +21,7 @@
 #import "search.h"
 
 @interface TableWeather ()
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIImageView *backgroundImageView;
 @property (nonatomic, strong) UIImageView *blurredImageView;
@@ -64,6 +65,22 @@ int tablenum;
     self.tableView.separatorColor = [UIColor colorWithWhite:1 alpha:0.2];
     //self.tableView.pagingEnabled = YES;//能夠翻轉
     [self.view addSubview:self.tableView];
+    
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+
+    [self.refreshControl addTarget:self action:@selector(refresh)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl]; //把RefreshControl加到TableView中
+    
+}
+-(void) refresh{
+    AppDelegate *call = [AppDelegate new];
+    [call coredataupdate];
+    //你下拉更新之後要做的事.
+    [_refreshControl endRefreshing];
+    [self UpdateWeather];
+    [_tableView reloadData]; //重新刷新ＴＡＢＬＥ數據
     
 }
 - (void)initbutton{
@@ -239,14 +256,8 @@ int tablenum;
         [appcall DeleteCoreData:deleteString];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:YES];
         [self ChangeViewAutolayout];
-        //[self.view reloadInputViews];
-        //[self.view r]
-        //刪除對應的表格項目
-        //[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationRight];
         
-        //ㄥ- See more at: http://furnacedigital.blogspot.tw/2012/02/uitableview.html#sthash.CmLiSmf8.dpuf
-        //[tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
+     }
 }
 - (void)NothingCell:(UITableViewCell *)cell title:(NSString *)title {
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];

@@ -24,5 +24,6 @@
 - (NSMutableDictionary *)dataFetchRequest : (NSString *)String;
 - (void)DeleteCoreData: (NSString *)row;
 - (void)yesnofirstopen;
+- (void)coredataupdate;
 @end
 
