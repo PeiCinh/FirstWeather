@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		62E1E8858DFBC55F36F8844B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3589692D86D04B849CF6EE10 /* libPods.a */; };
+		B900B7821C4558780024F316 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B900B7811C4558780024F316 /* icon@2x.png */; };
 		B914132A1C4419A300581AC9 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = B914130F1C4419A300581AC9 /* bg.png */; };
 		B914132B1C4419A300581AC9 /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B91413101C4419A300581AC9 /* bg@2x.png */; };
 		B914132C1C4419A300581AC9 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B91413111C4419A300581AC9 /* menuIcon.png */; };
@@ -80,6 +81,7 @@
 /* Begin PBXFileReference section */
 		3589692D86D04B849CF6EE10 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		79D8190EDCD0182E72D8F602 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B900B7811C4558780024F316 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		B914130F1C4419A300581AC9 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		B91413101C4419A300581AC9 /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
 		B91413111C4419A300581AC9 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuIcon.png; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 		B914130E1C4419A300581AC9 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				B900B7811C4558780024F316 /* icon@2x.png */,
 				B914130F1C4419A300581AC9 /* bg.png */,
 				B91413101C4419A300581AC9 /* bg@2x.png */,
 				B91413111C4419A300581AC9 /* menuIcon.png */,
@@ -459,6 +462,7 @@
 				B91413391C4419A300581AC9 /* weather-rain-night.png in Resources */,
 				B91413361C4419A300581AC9 /* weather-mist2x.png in Resources */,
 				B914132B1C4419A300581AC9 /* bg@2x.png in Resources */,
+				B900B7821C4558780024F316 /* icon@2x.png in Resources */,
 				B91413441C4419A300581AC9 /* weather-tstorm2x.png in Resources */,
 				B91413411C4419A300581AC9 /* weather-snow.png in Resources */,
 				B914132C1C4419A300581AC9 /* menuIcon.png in Resources */,
