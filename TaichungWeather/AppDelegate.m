@@ -35,7 +35,7 @@
 }
 // https://disp.cc/b/11-88Jy
 - (void)yesnofirstopen{
-    NSLog(@"First Work Core Date");
+    ////NSLog(@"First Work Core Date");
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"])
     {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
@@ -47,7 +47,7 @@
     }
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
         [self insertCoreData:BasicWoeid];
-        NSLog(@"Firstwork");
+        //NSLog(@"Firstwork");
     }else{
         NSTimer *time = [NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(coredataupdate) userInfo:nil repeats:YES];
         [self coredataupdate];
@@ -55,7 +55,7 @@
 
 }
 - (void)coredataupdate{
-    //NSLog(@"time");
+    ////NSLog(@"time");
     NSManagedObjectContext *context = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Weather" inManagedObjectContext:context]];
@@ -67,7 +67,7 @@
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     for (NSManagedObject *info in fetchedObjects) {
         update = [self dataFetchRequest:[info valueForKeyPath:@"woeid"]];
-        NSLog(@"update = %@",update);
+        //NSLog(@"update = %@",update);
         [info setValue:[update valueForKeyPath:@"nowcode"] forKey:@"nowcode"];
         [info setValue:[update valueForKeyPath:@"nowtemp"] forKey:@"nowtemp"];
         [info setValue:[update valueForKeyPath:@"sunrise"] forKey:@"sunrise"];
@@ -88,7 +88,7 @@
 }
 - (void)insertCoreData: (NSString *)updatewoeid
 {
-    //NSLog(@"UpdateWoeid = %@",updatewoeid);
+    ////NSLog(@"UpdateWoeid = %@",updatewoeid);
     YQL *yql = [YQL new];
     WeatherDate *cell  = [WeatherDate new];
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -111,7 +111,7 @@
     NSError *error;
     if(![context save:&error])
     {
-        NSLog(@"不能保存：%@",[error localizedDescription]);
+        //NSLog(@"不能保存：%@",[error localizedDescription]);
     }
 }
 - (NSMutableDictionary *)dataFetchRequest : (NSString *)String
@@ -163,21 +163,21 @@
     [fetchRequest setEntity:entity];
     NSError *error;
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-    NSLog(@"array = %@,%i",fetchedObjects,[fetchedObjects count]);
-    //NSLog(@"11 = %@,",[fetchedObjects objectAtIndex:0]);
+    //NSLog(@"array = %@,%i",fetchedObjects,[fetchedObjects count]);
+    ////NSLog(@"11 = %@,",[fetchedObjects objectAtIndex:0]);
     for (NSManagedObject *info in fetchedObjects) {
-        NSLog(@"info = %@",info);
-        NSLog(@"woeid:%@", [info valueForKey:@"woeid"]);
-        NSLog(@"city:%@", [info valueForKey:@"city"]);
-        NSLog(@"nowcode:%@", [info valueForKey:@"nowcode"]);
-        NSLog(@"nowtemp:%@", [info valueForKey:@"nowtemp"]);
-        NSLog(@"sunrise:%@", [info valueForKey:@"sunrise"]);
-        NSLog(@"sunset:%@", [info valueForKey:@"sunset"]);
+        //NSLog(@"info = %@",info);
+        //NSLog(@"woeid:%@", [info valueForKey:@"woeid"]);
+        //NSLog(@"city:%@", [info valueForKey:@"city"]);
+        //NSLog(@"nowcode:%@", [info valueForKey:@"nowcode"]);
+        //NSLog(@"nowtemp:%@", [info valueForKey:@"nowtemp"]);
+        //NSLog(@"sunrise:%@", [info valueForKey:@"sunrise"]);
+        //NSLog(@"sunset:%@", [info valueForKey:@"sunset"]);
         for (int i = 1; i <=5; i++) {
-            NSLog(@"day%i:%@",i, [info valueForKey:[NSString stringWithFormat:@"day%i",i]]);
-            NSLog(@"code%i:%@",i, [info valueForKey:[NSString stringWithFormat:@"code%i",i]]);
-            NSLog(@"high%i:%@",i, [info valueForKey:[NSString stringWithFormat:@"high%i",i]]);
-            NSLog(@"low%i:%@",i, [info valueForKey:[NSString stringWithFormat:@"low%i",i]]);
+            //NSLog(@"day%i:%@",i, [info valueForKey:[NSString stringWithFormat:@"day%i",i]]);
+            //NSLog(@"code%i:%@",i, [info valueForKey:[NSString stringWithFormat:@"code%i",i]]);
+            //NSLog(@"high%i:%@",i, [info valueForKey:[NSString stringWithFormat:@"high%i",i]]);
+            //NSLog(@"low%i:%@",i, [info valueForKey:[NSString stringWithFormat:@"low%i",i]]);
         }
     }
 }
@@ -224,7 +224,7 @@
         error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
         // Replace this with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        //NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
     
@@ -256,7 +256,7 @@
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            //NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
     }
