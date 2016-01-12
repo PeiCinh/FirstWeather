@@ -79,7 +79,7 @@
     [_SearchUi setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     [_SearchUi sizeToFit];
     
-    _SearchUi.placeholder =@"请输入要搜索的词语";
+    _SearchUi.placeholder =@"請输入要搜索的詞語";
     _SearchUi.tintColor = [UIColor whiteColor];
     _SearchUi.barTintColor = [UIColor redColor];
     self.SearchUi.delegate = self;
