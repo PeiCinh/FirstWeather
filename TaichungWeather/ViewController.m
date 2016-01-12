@@ -12,42 +12,24 @@
 #import "AppDelegate.h"
 #import <TSMessage.h>
 @interface ViewController ()
-
+@property (nonatomic, strong) UIImageView *backgroundImageView;
 @end
 
 @implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIImage *background = [UIImage imageNamed:@"bg"];
     
-    YQL * yql = [YQL new];
-    NSString *Query = @"select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202306181";
-    NSDictionary *weatherDic = [yql query:Query];
-    NSLog(@"22 = %@",[[weatherDic valueForKeyPath:@"query.results.channel.item"] description]);
-     //self.view.backgroundColor = [UIColor redColor];
+    self.backgroundImageView = [[UIImageView alloc] initWithImage:background];
+    self.backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:self.backgroundImageView];
+    [self.view addSubview:_backgroundImageView];
+}
 
 
-    // Do any additional setup after loading the view, typically from a nib.
-}
--(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
-    
-    if ([elementName isEqualToString:@"yweather:condition"]) {
-        
-        NSLog(@"Today's weather is %@",[attributeDict objectForKey:@"text"]);
-        
-    }
-    NSLog(@"xml = %@",elementName);
-}
-/*
- 
- $.getJSON('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202306180&format=json&callback=?', function(json) {
- var w_code = weather_con[json.query.results.channel.item.condition.code.toString()];
- var w_temp = Math.round((json.query.results.channel.item.condition.temp - 32)*5/9) + "℃";
- console.log(w_code);
- console.log(w_temp);
- });
  
  //這個我翻得可能不是很標準...
- weather_con = {
+/* weather_con = {
  "0":"龍捲風",
  "1":"熱帶風暴",
  "2":"颶風",
