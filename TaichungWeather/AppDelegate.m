@@ -62,21 +62,25 @@
     NSError *error;
     //更新谁的条件在这里配置；
     //NSString *theName = @"uptest";
+   
     //------------------------------------------------------------------------------------
+    YQL *yql = [YQL new];
+    WeatherDate *cell  = [WeatherDate new];
     id update;
+    //id update= [yql query:updatewoeid];
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+    
     for (NSManagedObject *info in fetchedObjects) {
-        update = [self dataFetchRequest:[info valueForKeyPath:@"woeid"]];
-        //NSLog(@"update = %@",update);
-        [info setValue:[update valueForKeyPath:@"nowcode"] forKey:@"nowcode"];
-        [info setValue:[update valueForKeyPath:@"nowtemp"] forKey:@"nowtemp"];
-        [info setValue:[update valueForKeyPath:@"sunrise"] forKey:@"sunrise"];
-        [info setValue:[update valueForKeyPath:@"sunset"] forKey:@"sunset"];
+        update = [yql query:[info valueForKeyPath:@"woeid"]];
+        [info setValue:[update valueForKeyPath:[cell JSONKey:@"newcode"]] forKey:@"nowcode"];
+        [info setValue:[update valueForKeyPath:[cell JSONKey:@"newtemp" ]] forKey:@"nowtemp"];
+        [info setValue:[update valueForKeyPath:[cell JSONKey:@"sunrise" ]] forKey:@"sunrise"];
+        [info setValue:[update valueForKeyPath:[cell JSONKey:@"sunset" ]] forKey:@"sunset"];
         for (int i = 1; i<=5; i++) {
-            [info setValue:[update valueForKeyPath:[NSString stringWithFormat:@"day%i",i]] forKey:[NSString stringWithFormat:@"day%i",i]];
-            [info setValue:[update valueForKeyPath:[NSString stringWithFormat:@"code%i",i]] forKey:[NSString stringWithFormat:@"code%i",i]];
-            [info setValue:[update valueForKeyPath:[NSString stringWithFormat:@"high%i",i]] forKey:[NSString stringWithFormat:@"high%i",i]];
-            [info setValue:[update valueForKeyPath:[NSString stringWithFormat:@"low%i",i]] forKey:[NSString stringWithFormat:@"low%i",i]];
+            [info setValue:[[update valueForKeyPath:[cell JSONKey:@"day"]] objectAtIndex:i-1] forKey:[NSString stringWithFormat:@"day%i",i]];
+            [info setValue:[[update valueForKeyPath:[cell JSONKey:@"daiycode"]] objectAtIndex:i-1] forKey:[NSString stringWithFormat:@"code%i",i]];
+            [info setValue:[[update valueForKeyPath:[cell JSONKey:@"high"]] objectAtIndex:i-1] forKey:[NSString stringWithFormat:@"high%i",i]];
+            [info setValue:[[update valueForKeyPath:[cell JSONKey:@"low"]] objectAtIndex:i-1] forKey:[NSString stringWithFormat:@"low%i",i]];
         }
     }
     [context save:nil];
